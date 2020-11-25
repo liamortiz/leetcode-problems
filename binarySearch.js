@@ -1,17 +1,24 @@
-function bSearch(arr, target) {
+function bSearch(arr, target) {    
     if (arr.length <= 1) return arr;
 
-    const middle = Math.floor(arr.length / 2);
-    console.log(`Middle: ${arr[middle]} Array: ${arr}`);
+    let left = 0;
+    let right = arr.length - 1;
 
-    if (arr[middle] === target) return middle;
-    if (arr[middle] > target) {
-        arr.splice(middle, arr.length);
-    } else {
-        arr.splice(0, middle)
+    while (left < right) {
+        const middle = Math.floor((left + right) / 2);
+
+        console.log(arr[left], arr[middle], arr[right]);
+
+        if (arr[middle] === target) {
+            console.log("Index: ", middle);
+            return middle;
+        }
+        if (arr[middle] < target) {
+            left = middle + 1;
+        } else {
+            right = middle;
+        }
     }
-
-    bSearch(arr, target);
 }
 
 bSearch([1, 3, 5, 7, 9, 10, 13, 16, 20, 23], 7)
